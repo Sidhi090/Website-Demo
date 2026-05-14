@@ -7,7 +7,7 @@ let connectionPromise;
 export const connectDb = async () => {
   if (mongoose.connection.readyState === 1) return mongoose.connection;
 
-  connectionPromise ||= mongoose.connect(MONGO_URI);
+  connectionPromise ||= mongoose.connect(MONGO_URI, { serverSelectionTimeoutMS: 2000 });
   await connectionPromise;
   return mongoose.connection;
 };
